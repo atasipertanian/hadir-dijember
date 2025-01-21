@@ -245,7 +245,7 @@
 
         .wa-button {
             width: 75%;
-            background-color: #128C7E;
+            background-color: #41B548;
             color: white;
             border: none;
             border-radius: 12px;
@@ -263,7 +263,7 @@
         }
 
         .wa-button:hover {
-            background-color: #075E54;
+            background-color: #31803F;
         }
 
         .wa-button img {
@@ -990,9 +990,14 @@
                     data-id="3c5e1826" data-element_type="widget" data-widget_type="heading.default">
                     <div class="elementor-widget-container">
                         <h1 class="elementor-heading-title elementor-size-default"
-                            style="font-size: 28px;font-family: 'Arimo';text-align: center;color: #ffffff;padding-left: 20px;padding-right: 20px;">
-
-                            Anda sudah mengambil keputusan yang tepat!
+                            style="font-size: 28px; font-family: 'Arimo'; text-align: center; color: #ffffff; background-color: #E74929; display: inline; padding: 5px; border-radius: 10px; ">
+                            Anda sudah mengambil
+                        </h1>
+                    </div>
+                    <div class="elementor-widget-container" style="    margin-top: 4px;">
+                        <h1 class="elementor-heading-title elementor-size-default"
+                            style="font-size: 28px; font-family: 'Arimo'; text-align: center; color: #ffffff; background-color: #E74929; display: inline; padding: 5px; border-radius: 10px; ">
+                            keputusan yang tepat!
                         </h1>
                     </div>
                 </div>
@@ -1186,20 +1191,6 @@
                             </button>
                         </div>
                         <div class="marketplace-container">
-                            <button class="tokped-button"
-                                onclick="window.open('https://tokopedia.link/rdCqrRs1WPb', '_blank')">
-                                <img src="tokped.png" alt="Tokopedia">
-                                Pesan di Tokopedia
-                            </button>
-                        </div>
-                        <div class="marketplace-container">
-                            <button class="tikshop-button"
-                                onclick="window.open('https://vt.tokopedia.com/t/ZS65M6YRF/', '_blank')">
-                                <img src="tiktokshop.png" alt="tiktokshop">
-                                Pesan di Tiktok Shop
-                            </button>
-                        </div>
-                        <div class="marketplace-container">
                             <button class="wa-button"
                                 onclick="window.open('https://wa.me/6281312349723?text=Mau%20tanya2%20tentang%20fulka%20lur,%20kalau%20cocok%20saya%20mau%20order,%20mohon%20dibantu', '_blank')">
                                 <img src="wa.png" alt="WhatsApp">
@@ -1220,7 +1211,7 @@
                         </h2>
                         <h2 class="elementor-heading-title elementor-size-default"
                             style=" font-size: 18px; font-weight: normal; font-family: 'Arimo'; text-align: left; color: #012403; padding-top: 20px; line-height: 22px; ;margin-left: 28px;margin-right: 28px;">
-                            1. Pilih provinsi anda <br>
+                            1. Pilih provinsi Anda <br>
                             2. Pilih kabupaten dan kecamatan <br>
                             3. Cari Mitra terdekat <br>
                             4. Klik <span style="font-weight:bold;">"beli di whatsapp"</span> atau <span
@@ -1249,6 +1240,13 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
                         <div id="shopList" class="shops"></div>
                     </div>
 
+                    <input type="text" id="searchBar" class="search-bar" placeholder="Cari kota atau toko terdekat ..."
+                        onkeyup="searchCards()"
+                        style="width: 100%; padding: 10px; font-size: 16px; border-radius: 10px; border: 1px solid #0D4816;">
+
+                    <div class="search-results" id="searchResults" style="margin-bottom: 20px;"></div>
+
+
                     <div>
                         <!-- Accordion DI Yogyakarta -->
                         <button class="accordion">DI Yogyakarta</button>
@@ -1258,7 +1256,8 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
                             <div class="panel" style="text-align: left; display: block; padding-right: 0px;">
                                 <button class="accordion">Sentolo</button>
                                 <div class="panel" style="text-align: left; display: block; padding-right: 0px;">
-                                    <div class="card" style="margin-bottom: 10px;">
+                                    <div class="card" data-name="Tumarindo Tani"
+                                        data-location="RT38, Dukuh Krebet, Desa Tuksono" data-contact="0817-7997-1222">
                                         <!-- Card Content -->
                                         <ul class="elementor-icon-list-items" style="padding-top: 12px;">
                                             <li class="elementor-icon-list-item"
@@ -1325,7 +1324,9 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
                                 <!-- Kecamatan Minggir -->
                                 <button class="accordion">Minggir</button>
                                 <div class="panel" style="text-align: left; display: block; padding-right: 0px;">
-                                    <div class="card" style="margin-bottom: 10px;">
+                                    <div class="card" style="margin-bottom: 10px;" data-name="Limasatu Tani"
+                                        data-location="Jl. Gedongan-Tempel, Sidorejo, Sendangrejo"
+                                        data-contact="0813-2888-8271">
                                         <!-- Card Content -->
                                         <ul class="elementor-icon-list-items" style="padding-top: 12px;">
                                             <li class="elementor-icon-list-item"
@@ -2585,6 +2586,53 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
                             </div>
                         </div>
                     </div>
+                    <script>
+                        const accordions = document.querySelectorAll('.accordion');
+                        accordions.forEach(acc => {
+                            acc.addEventListener('click', function () {
+                                this.classList.toggle('active');
+                                const panel = this.nextElementSibling;
+                                if (panel.style.display === 'block') {
+                                    panel.style.display = 'none';
+                                } else {
+                                    panel.style.display = 'block';
+                                }
+                            });
+                        });
+
+                        function searchCards() {
+                            const searchTerm = document.getElementById('searchBar').value.toLowerCase().trim(); // Mengambil nilai input
+                            const cards = document.querySelectorAll('.card'); // Pilih semua kartu
+                            const searchResults = document.getElementById('searchResults');
+
+                            searchResults.innerHTML = ''; // Hapus hasil sebelumnya
+
+                            if (searchTerm === '') {
+                                // Jika pencarian kosong, kosongkan hasil dan keluar dari fungsi
+                                return;
+                            }
+
+                            const addedCards = new Set(); // Gunakan Set untuk melacak kartu berdasarkan atribut unik (data-name)
+
+                            cards.forEach(card => {
+                                const name = card.getAttribute('data-name').toLowerCase();
+                                const location = card.getAttribute('data-location').toLowerCase();
+                                const contact = card.getAttribute('data-contact').toLowerCase();
+
+                                // Periksa apakah atribut cocok dengan pencarian
+                                if (
+                                    (name.includes(searchTerm) || location.includes(searchTerm) || contact.includes(searchTerm)) &&
+                                    !addedCards.has(name) // Gunakan nama sebagai penanda unik
+                                ) {
+                                    const cardClone = card.cloneNode(true); // Gandakan kartu
+                                    searchResults.appendChild(cardClone); // Tambahkan kartu ke hasil pencarian
+                                    addedCards.add(name); // Tandai kartu sebagai ditambahkan menggunakan nama
+                                }
+                            });
+                        }
+                    </script>
+
+
 
                     <button class="dapatkan-button" style="font-family: 'Arimo';"
                         onclick="window.open('https://wa.me/6281312349723?text=Mau%20tanya2%20tentang%20fulka%20lur,%20kalau%20cocok%20saya%20mau%20order,%20mohon%20dibantu', '_blank')">
@@ -2595,23 +2643,6 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
 
 
 
-                <script>
-                    var acc = document.getElementsByClassName("accordion");
-                    var i;
-
-                    for (i = 0; i < acc.length; i++) {
-                        acc[i].addEventListener("click", function () {
-                            this.classList.toggle("active");
-                            var panel = this.nextElementSibling;
-                            if (panel.style.display === "block") {
-                                panel.style.display = "none";
-                            } else {
-                                panel.style.display = "block";
-                            }
-                        });
-                    }
-                </script>
-
 
             </div>
         </div>
@@ -2620,7 +2651,7 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
 
         <div data-wpr-lazyrender="1"
             class="elementor-element elementor-element-4cbda222 e-flex e-con-boxed e-con e-parent" data-id="4cbda222"
-            data-element_type="container">
+            data-element_type="container" style="display: none;">
             <div class="e-con-inner">
                 <div class="elementor-element elementor-element-1b2315f7 elementor-widget elementor-widget-html"
                     data-id="1b2315f7" data-element_type="widget" data-widget_type="html.default">
@@ -3133,7 +3164,7 @@ https://codingstudio-spaces.sgp1.cdn.digitaloceanspaces.com/staging/search.png
         </div>
         <div data-wpr-lazyrender="1"
             class="elementor-element elementor-element-3891075c e-flex e-con-boxed e-con e-parent" data-id="3891075c"
-            data-element_type="container">
+            data-element_type="container" style="display: none;">
             <div class="e-con-inner">
                 <div class="elementor-element elementor-element-6b2b8a2 elementor-widget elementor-widget-html"
                     data-id="6b2b8a2" data-element_type="widget" data-widget_type="html.default">
